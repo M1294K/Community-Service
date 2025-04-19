@@ -1,0 +1,58 @@
+package com.blogdemo.controller;
+
+import com.blogdemo.dto.PostRequest;
+import com.blogdemo.dto.PostResponse;
+
+import com.blogdemo.model.Post;
+import com.blogdemo.service.PostService;
+import com.blogdemo.util.JwtUtil;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+import java.util.stream.Collectors;
+
+@RestController
+@RequestMapping("/api/posts")
+public class PostController {
+
+    @Autowired
+    private PostService postService;
+
+    @Autowired
+    private JwtUtil jwtUtil;
+
+    @PostMapping
+    public ResponseEntity<?> createPost(
+            @RequestHeader("Authorization") String authorizationHeader,
+            @RequestBody PostRequest postRequest
+    ) {
+        // "Bearer {token}" 형식에서 토큰만 추출
+        String token = authorizationHeader.replace("Bearer ", "");
+        String email = jwtUtil.extractEmail(token);
+
+        Post createdPost = postService.createPost(postRequest, email);
+        return ResponseEntity.ok(createdPost);
+    }
+
+    @GetMapping
+    public ResponseEntity<List<PostResponse>> getAllPosts() {
+        return ResponseEntity.ok(postService.getAllPosts());
+    }
+
+
+
+    @PutMapping("/{postId}")
+    public ResponseEntity<PostResponse> updatePost(
+            @PathVariable Long postId,
+            @RequestBody PostRequest postRequest,
+            @RequestHeader("Authorization") String token
+    ) {
+        String email = jwtUtil.extractEmail(token.substring(7));
+        PostResponse response = postService.updatePost(postId, postRequest, email);
+        return ResponseEntity.ok(response);
+    }
+
+
+}
