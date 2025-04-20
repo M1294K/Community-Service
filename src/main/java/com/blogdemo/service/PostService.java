@@ -6,6 +6,7 @@ import com.blogdemo.model.Post;
 import com.blogdemo.model.User;
 import com.blogdemo.repository.PostRepository;
 import com.blogdemo.repository.UserRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -66,7 +67,14 @@ public class PostService {
 
         return new PostResponse(updated.getId(), updated.getTitle(), updated.getContent(), updated.getAuthor().getUsername());
     }
-
+    @Transactional
+    public void deletePost(Long postId, String email){
+        Post post = postRepository.findById(postId).orElseThrow(() -> new IllegalArgumentException("Post not found"));
+        if (!post.getAuthor().getEmail().equals(email)){
+            throw new SecurityException("삭제 권한이 없습니다");
+        }
+        postRepository.delete(post);
+    }
 
 }
 

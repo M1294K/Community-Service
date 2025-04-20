@@ -53,6 +53,11 @@ public class PostController {
         PostResponse response = postService.updatePost(postId, postRequest, email);
         return ResponseEntity.ok(response);
     }
-
+    @DeleteMapping("/{postId}")
+    public ResponseEntity<String> deletePost(@PathVariable Long postId, @RequestHeader("Authorization") String token){
+        String email = jwtUtil.extractEmail(token.substring(7));
+        postService.deletePost(postId, email);
+        return ResponseEntity.ok("게시물이 성공적으로 삭제되었습니다.");
+    }
 
 }
