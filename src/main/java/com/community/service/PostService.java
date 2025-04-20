@@ -1,7 +1,7 @@
 package com.community.service;
 
-import com.community.dto.PostRequest;
-import com.community.dto.PostResponse;
+import com.community.dto.post.PostRequest;
+import com.community.dto.post.PostResponse;
 import com.community.model.Post;
 import com.community.model.User;
 import com.community.repository.PostRepository;
