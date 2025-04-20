@@ -1,4 +1,4 @@
-package com.blogdemo.exception;
+package com.community.exception;
 
 public class GlobalExceptionHandler {
 }

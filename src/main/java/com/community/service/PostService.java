@@ -1,11 +1,11 @@
-package com.blogdemo.service;
+package com.community.service;
 
-import com.blogdemo.dto.PostRequest;
-import com.blogdemo.dto.PostResponse;
-import com.blogdemo.model.Post;
-import com.blogdemo.model.User;
-import com.blogdemo.repository.PostRepository;
-import com.blogdemo.repository.UserRepository;
+import com.community.dto.PostRequest;
+import com.community.dto.PostResponse;
+import com.community.model.Post;
+import com.community.model.User;
+import com.community.repository.PostRepository;
+import com.community.repository.UserRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

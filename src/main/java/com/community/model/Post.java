@@ -1,4 +1,4 @@
-package com.blogdemo.model;
+package com.community.model;
 
 import jakarta.persistence.*;
 import lombok.Getter;

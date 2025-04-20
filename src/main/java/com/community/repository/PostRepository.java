@@ -1,7 +1,6 @@
-package com.blogdemo.repository;
+package com.community.repository;
 
-import com.blogdemo.model.Post;
-import com.blogdemo.model.User;
+import com.community.model.Post;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 

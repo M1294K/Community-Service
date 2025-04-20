@@ -1,9 +1,9 @@
-package com.blogdemo.controller;
+package com.community.controller;
 
 import java.util.List;
 
-import com.blogdemo.model.User;
-import com.blogdemo.service.UserService;
+import com.community.model.User;
+import com.community.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.blogdemo.dto.LoginRequest;
-import com.blogdemo.util.JwtUtil;
+import com.community.dto.LoginRequest;
+import com.community.util.JwtUtil;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.http.ResponseEntity;
 

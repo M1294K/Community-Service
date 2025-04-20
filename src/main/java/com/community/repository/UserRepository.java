@@ -1,6 +1,6 @@
-package com.blogdemo.repository;
+package com.community.repository;
 
-import com.blogdemo.model.User;
+import com.community.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;

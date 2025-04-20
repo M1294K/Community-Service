@@ -1,17 +1,16 @@
-package com.blogdemo.controller;
+package com.community.controller;
 
-import com.blogdemo.dto.PostRequest;
-import com.blogdemo.dto.PostResponse;
+import com.community.dto.PostRequest;
+import com.community.dto.PostResponse;
 
-import com.blogdemo.model.Post;
-import com.blogdemo.service.PostService;
-import com.blogdemo.util.JwtUtil;
+import com.community.model.Post;
+import com.community.service.PostService;
+import com.community.util.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/posts")

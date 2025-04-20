@@ -1,6 +1,6 @@
-package com.blogdemo.filter;
+package com.community.filter;
 
-import com.blogdemo.util.JwtUtil;
+import com.community.util.JwtUtil;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;

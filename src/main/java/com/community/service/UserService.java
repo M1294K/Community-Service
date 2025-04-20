@@ -1,9 +1,9 @@
-package com.blogdemo.service;
+package com.community.service;
 
 import java.util.List;
 
-import com.blogdemo.model.User;
-import com.blogdemo.repository.UserRepository;
+import com.community.model.User;
+import com.community.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
