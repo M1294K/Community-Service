@@ -2,14 +2,15 @@ package com.community.dto.comment;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.Setter;
 
 import java.time.LocalDateTime;
 
-@Getter
+@Getter @Setter
 @AllArgsConstructor
 public class CommentResponse {
     private Long id;
     private String content;
-    private String authorEmail;
+    private String authorUsername;
     private LocalDateTime createdAt;
 }

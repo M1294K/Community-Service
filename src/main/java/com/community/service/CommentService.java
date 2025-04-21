@@ -40,6 +40,6 @@ public class CommentService {
 
         Comment saved = commentRepository.save(comment);
 
-        return new CommentResponse(saved.getId(), saved.getContent(), user.getEmail(), saved.getCreatedAt());
+        return new CommentResponse(saved.getId(), saved.getContent(), user.getUsername(), saved.getCreatedAt());
     }
 }
