@@ -35,11 +35,19 @@ public class PostController {
         return ResponseEntity.ok(createdPost);
     }
 
+
+    //글 조회
     @GetMapping
     public ResponseEntity<List<PostResponse>> getAllPosts() {
         return ResponseEntity.ok(postService.getAllPosts());
     }
 
+    //글 상세 조회 <- comment 까지 담아서 출력해줄 예정
+    @GetMapping("/{postId}")
+    public ResponseEntity<PostResponse> getPostById(@PathVariable Long postId) {
+        PostResponse response = postService.getPostById(postId);
+        return ResponseEntity.ok(response);
+    }
 
 
     @PutMapping("/{postId}")

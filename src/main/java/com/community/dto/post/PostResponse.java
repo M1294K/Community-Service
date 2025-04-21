@@ -10,6 +10,7 @@ public class PostResponse {
     private String content;
     private String authorUsername;
 
+
     public PostResponse(Long id, String title, String content, String authorUsername) {
         this.id = id;
         this.title = title;
