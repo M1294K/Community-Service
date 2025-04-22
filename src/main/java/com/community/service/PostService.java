@@ -1,7 +1,9 @@
 package com.community.service;
 
+import com.community.dto.comment.CommentResponse;
 import com.community.dto.post.PostRequest;
 import com.community.dto.post.PostResponse;
+import com.community.model.Comment;
 import com.community.model.Post;
 import com.community.model.User;
 import com.community.repository.PostRepository;
@@ -49,8 +51,10 @@ public class PostService {
     public PostResponse getPostById(Long postId) {
         Post post = postRepository.findById(postId)
                 .orElseThrow(() -> new IllegalArgumentException("해당 게시글이 존재하지 않습니다."));
+        List<CommentResponse> comments = post.getComments().stream().map(comment -> new CommentResponse(
+                comment.getId(),comment.getContent(),comment.getAuthor().getUsername(), comment.getCreatedAt())).collect(Collectors.toList());
 
-        return new PostResponse(post.getId(), post.getTitle(), post.getContent(), post.getAuthor().getUsername());
+        return new PostResponse(post.getId(), post.getTitle(), post.getContent(), post.getAuthor().getUsername(),comments);
     }
 
     public PostResponse updatePost(Long postId, PostRequest postRequest, String email) {
