@@ -42,4 +42,19 @@ public class CommentService {
 
         return new CommentResponse(saved.getId(), saved.getContent(), user.getUsername(), saved.getCreatedAt());
     }
+
+    @Transactional
+    public CommentResponse updateComment(Long postId, Long commentId, CommentRequest request, String email){
+        Comment comment = commentRepository.findById(commentId).orElseThrow(() -> new IllegalArgumentException("댓글이 존재하지 않습니다."));
+        if (!comment.getPost().getId().equals(postId)){
+            throw new IllegalArgumentException("댓글이 해당 게시글에 속하지 않습니다.");
+        }
+        if (!comment.getAuthor().getEmail().equals(email)){
+            throw new SecurityException("댓글 수정 권한이 없습니다.");
+        }
+        comment.setContent(request.getContent());
+        Comment updated = commentRepository.save(comment);
+
+        return new CommentResponse(updated.getId(), updated.getContent(), updated.getAuthor().getUsername(), updated.getCreatedAt());
+    }
 }
