@@ -27,4 +27,8 @@ public class Post {
 
     @OneToMany(mappedBy = "post", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Comment> comments = new ArrayList<>();
+
+    @ManyToOne
+    @JoinColumn(name = "board_id")
+    private Board board;  // <-- 이걸로 어떤 게시판에 속한 글인지 연결
 }
