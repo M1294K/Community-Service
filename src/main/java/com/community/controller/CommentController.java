@@ -38,4 +38,16 @@ public class CommentController {
         CommentResponse response = commentService.updateComment(postId, commentId, request, email);
         return ResponseEntity.ok(response);
     }
+
+    @DeleteMapping("/{commentId}")
+    public ResponseEntity<Void> deleteComment(
+            @PathVariable Long postId,
+            @PathVariable Long commentId,
+            @RequestHeader("Authorization") String token
+    ){
+        String email = jwtUtil.extractEmail(token.substring(7));
+        commentService.deleteComment(postId, commentId, email);
+        return ResponseEntity.noContent().build(); // 204 응답
+    }
+
 }

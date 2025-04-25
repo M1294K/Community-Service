@@ -23,7 +23,7 @@ public class CommentService {
     private final PostRepository postRepository;
     private final UserRepository userRepository;
     private final JwtUtil jwtUtil;
-
+    //댓글 작성
     @Transactional
     public CommentResponse createComment(Long postId, CommentRequest request, String token) {
         String email = jwtUtil.extractEmail(token.substring(7));
@@ -42,7 +42,7 @@ public class CommentService {
 
         return new CommentResponse(saved.getId(), saved.getContent(), user.getUsername(), saved.getCreatedAt());
     }
-
+    //댓글 수정
     @Transactional
     public CommentResponse updateComment(Long postId, Long commentId, CommentRequest request, String email){
         Comment comment = commentRepository.findById(commentId).orElseThrow(() -> new IllegalArgumentException("댓글이 존재하지 않습니다."));
@@ -57,4 +57,21 @@ public class CommentService {
 
         return new CommentResponse(updated.getId(), updated.getContent(), updated.getAuthor().getUsername(), updated.getCreatedAt());
     }
+    //댓글 삭제
+    @Transactional
+    public void deleteComment(Long postId, Long commentId, String email){
+        Comment comment = commentRepository.findById(commentId)
+                .orElseThrow(() -> new IllegalArgumentException("댓글이 존재하지 않습니다."));
+
+        if (!comment.getPost().getId().equals(postId)){
+            throw new IllegalArgumentException("댓글이 해당 게시글에 속하지 않습니다.");
+        }
+
+        if (!comment.getAuthor().getEmail().equals(email)){
+            throw new SecurityException("댓글 삭제 권한이 없습니다.");
+        }
+
+        commentRepository.delete(comment);
+    }
+
 }
