@@ -31,7 +31,7 @@ public class PostController {
         String token = authorizationHeader.replace("Bearer ", "");
         String email = jwtUtil.extractEmail(token);
 
-        Post createdPost = postService.createPost(postRequest, email);
+        PostResponse createdPost = postService.createPost(postRequest, email);
         return ResponseEntity.ok(createdPost);
     }
 
