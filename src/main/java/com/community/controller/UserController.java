@@ -48,7 +48,7 @@ public class UserController {
             return ResponseEntity.status(401).body("Invalid email or password");
         }
 
-        String token = jwtUtil.generateToken(user.getEmail());
+        String token = jwtUtil.generateToken(user.getId(),user.getUsername(),user.getEmail());
         return ResponseEntity.ok().body("JWT Token: " + token);
     }
 
