@@ -73,5 +73,10 @@ public class CommentService {
 
         commentRepository.delete(comment);
     }
+    public void forceDeleteComment(Long commentId) {
+        Comment comment = commentRepository.findById(commentId)
+                .orElseThrow(() -> new IllegalArgumentException("Comment not found"));
+        commentRepository.delete(comment);
+    }
 
 }

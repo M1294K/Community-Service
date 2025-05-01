@@ -9,6 +9,8 @@ import com.community.util.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.http.HttpStatus;
+
 
 import java.util.List;
 
@@ -68,6 +70,17 @@ public class PostController {
         String email = jwtUtil.extractEmail(token.substring(7));
         postService.deletePost(postId, email);
         return ResponseEntity.ok("게시물이 성공적으로 삭제되었습니다.");
+    }
+    @DeleteMapping("/admin/{postId}")
+    public ResponseEntity<String> forceDeletePost(@PathVariable Long postId, @RequestHeader("Authorization") String token) {
+        String email = jwtUtil.extractEmail(token.substring(7));
+        String role = jwtUtil.extractRole(token.substring(7)); // 추출 로직 필요
+        if (!role.equals("ADMIN")) {
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).body("권한 없음");
+        }
+
+        postService.forceDeletePost(postId);
+        return ResponseEntity.ok("게시글 강제 삭제 완료");
     }
 
 }

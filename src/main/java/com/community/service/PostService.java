@@ -108,5 +108,10 @@ public class PostService {
         postRepository.delete(post);
     }
 
+    public void forceDeletePost(Long postId){
+        Post post = postRepository.findById(postId)
+                .orElseThrow(() -> new IllegalArgumentException("Post not found"));
+        postRepository.delete(post);
+    }
 }
 

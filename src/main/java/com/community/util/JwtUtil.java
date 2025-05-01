@@ -57,6 +57,14 @@ public class JwtUtil {
                 .getBody()
                 .get("username", String.class);
     }
+    public String extractRole(String token){
+        return Jwts.parserBuilder()
+                .setSigningKey(key)
+                .build()
+                .parseClaimsJws(token)
+                .getBody()
+                .get("role", String.class);
+    }
     public boolean validateToken(String token, String email) {
         try {
             String extractedEmail = extractEmail(token);
