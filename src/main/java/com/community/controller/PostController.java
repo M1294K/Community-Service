@@ -1,9 +1,11 @@
 package com.community.controller;
 
+import com.community.dto.board.BoardRequest;
 import com.community.dto.post.PostRequest;
 import com.community.dto.post.PostResponse;
 
 import com.community.model.Post;
+import com.community.service.BoardService;
 import com.community.service.PostService;
 import com.community.util.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -71,6 +73,7 @@ public class PostController {
         postService.deletePost(postId, email);
         return ResponseEntity.ok("게시물이 성공적으로 삭제되었습니다.");
     }
+
     @DeleteMapping("/admin/{postId}")
     public ResponseEntity<String> forceDeletePost(@PathVariable Long postId, @RequestHeader("Authorization") String token) {
         String email = jwtUtil.extractEmail(token.substring(7));
@@ -82,5 +85,7 @@ public class PostController {
         postService.forceDeletePost(postId);
         return ResponseEntity.ok("게시글 강제 삭제 완료");
     }
+
+
 
 }
