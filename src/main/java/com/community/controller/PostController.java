@@ -48,7 +48,10 @@ public class PostController {
         PostResponse response = postService.getPostById(postId);
         return ResponseEntity.ok(response);
     }
-
+    @GetMapping("/board/{boardId}")
+    public ResponseEntity<List<PostResponse>> getPostsByBoard(@PathVariable Long boardId) {
+        return ResponseEntity.ok(postService.getPostsByBoard(boardId));
+    }
 
     @PutMapping("/{postId}")
     public ResponseEntity<PostResponse> updatePost(

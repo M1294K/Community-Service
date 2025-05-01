@@ -72,6 +72,19 @@ public class PostService {
         return new PostResponse(post.getId(), post.getTitle(), post.getContent(), post.getAuthor().getUsername(),comments, post.getBoard().getName());
     }
 
+    public List<PostResponse> getPostsByBoard(Long boardId) {
+        List<Post> posts = postRepository.findByBoardId(boardId);
+        return posts.stream()
+                .map(post -> new PostResponse(
+                        post.getId(),
+                        post.getTitle(),
+                        post.getContent(),
+                        post.getAuthor().getUsername()
+                ))
+                .collect(Collectors.toList());
+    }
+
+
     public PostResponse updatePost(Long postId, PostRequest postRequest, String email) {
         Post post = postRepository.findById(postId)
                 .orElseThrow(() -> new IllegalArgumentException("Post not found"));

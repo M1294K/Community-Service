@@ -33,5 +33,12 @@ public class PostResponse {
         this.comments = List.of(); // 빈 리스트로 초기화
         this.boardName = boardName;
     }
+    public PostResponse(Long id, String title, String content, String authorUsername) {
+        this.id = id;
+        this.title = title;
+        this.content = content;
+        this.authorUsername = authorUsername;
+        this.comments = List.of(); // 빈 리스트로 초기화
+    }
 
 }
