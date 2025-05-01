@@ -24,8 +24,14 @@ public class UserController {
     private UserService userService;
 
     @PostMapping
-    public User createUser(@RequestBody User user) {
-        return userService.saveUser(user);
+    public ResponseEntity<?> createUser(@RequestBody User user) {
+        boolean isDuplicate = userService.existsByEmail(user.getEmail());
+        if (isDuplicate){
+            return ResponseEntity.status(409).body("Email is already in use");
+        } else{
+            userService.saveUser(user);
+            return ResponseEntity.ok("Email is available");
+        }
     }
 
     @GetMapping
@@ -48,8 +54,15 @@ public class UserController {
             return ResponseEntity.status(401).body("Invalid email or password");
         }
 
-        String token = jwtUtil.generateToken(user.getId(),user.getUsername(),user.getEmail());
+        String token = jwtUtil.generateToken(user.getId(),user.getUsername(),user.getEmail(), user.getRole().name());
         return ResponseEntity.ok().body("JWT Token: " + token);
+    }
+
+    @PostMapping("/promote")
+    public ResponseEntity<?> promoteToAdmin(@RequestHeader("Authorization") String token){
+        String email = jwtUtil.extractEmail(token.substring(7));
+        String result = userService.promoteToAdmin(email);
+        return ResponseEntity.ok(result);
     }
 
     @GetMapping("/check")
@@ -61,6 +74,5 @@ public class UserController {
             return ResponseEntity.ok("Email is available");
         }
     }
-
 }
 

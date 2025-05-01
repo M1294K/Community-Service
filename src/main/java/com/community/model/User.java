@@ -16,4 +16,7 @@ public class User {
     private String username;
     private String email;
     private String password;
+
+    @Enumerated(EnumType.STRING)
+    private Role role = Role.USER;   //기본은 일반 사용자
 }
