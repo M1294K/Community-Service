@@ -1,6 +1,8 @@
 package com.community.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.community.model.User;
 import com.community.service.UserService;
@@ -55,7 +57,10 @@ public class UserController {
         }
 
         String token = jwtUtil.generateToken(user.getId(),user.getUsername(),user.getEmail(), user.getRole().name());
-        return ResponseEntity.ok().body("JWT Token: " + token);
+        Map<String, String> response = new HashMap<>();
+        response.put("token", token);
+        response.put("username", user.getUsername());
+        return ResponseEntity.ok(response);
     }
 
     @PostMapping("/promote")
