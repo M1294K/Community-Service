@@ -40,7 +40,7 @@ public class CommentService {
 
         Comment saved = commentRepository.save(comment);
 
-        return new CommentResponse(saved.getId(), saved.getContent(), user.getUsername(), saved.getCreatedAt());
+        return new CommentResponse(saved.getId(), saved.getContent(), saved.getAuthor().getUsername(), saved.getCreatedAt());
     }
     //댓글 수정
     @Transactional
